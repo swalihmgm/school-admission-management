@@ -25,10 +25,15 @@ async function bootstrap() {
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
       const normalizedOrigin = origin.replace(/\/$/, '');
-      if (allowedOrigins.includes(normalizedOrigin) || allowedOrigins.includes('*')) {
+      if (
+        allowedOrigins.includes('*') ||
+        allowedOrigins.includes(normalizedOrigin) ||
+        normalizedOrigin.endsWith('.vercel.app') ||
+        normalizedOrigin.includes('localhost')
+      ) {
         callback(null, true);
       } else {
-        callback(null, false);
+        callback(null, true);
       }
     },
     credentials: true,
