@@ -1,0 +1,30 @@
+# compiled output
+/dist
+/node_modules
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# OS & IDEs
+.DS_Store
+/.idea
+.project
+.classpath
+.cproject
+.settings
+/screenshots
+
+# Tests
+/coverage
+
