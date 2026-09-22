@@ -71,12 +71,23 @@ export async function fetchApi<T = any>(
   }
 
   if (!response.ok) {
-    const errorMessage =
-      data?.message ||
-      (Array.isArray(data?.message) ? data.message.join(', ') : 'An unexpected API error occurred');
-    const errorObj: any = new Error(
-      typeof errorMessage === 'object' ? JSON.stringify(errorMessage) : errorMessage,
-    );
+    let errorMessage = 'An unexpected error occurred. Please try again.';
+
+    if (Array.isArray(data?.message)) {
+      errorMessage = data.message.join(', ');
+    } else if (typeof data?.message === 'string' && data.message.trim()) {
+      errorMessage = data.message;
+    } else if (response.status === 401) {
+      errorMessage = 'Invalid email or password';
+    } else if (response.status === 403) {
+      errorMessage = 'Access denied: You do not have permission to perform this action.';
+    } else if (response.status === 404) {
+      errorMessage = 'Requested resource not found.';
+    } else if (response.status >= 500) {
+      errorMessage = 'Server error. Please try again in a few moments.';
+    }
+
+    const errorObj: any = new Error(errorMessage);
     errorObj.status = response.status;
     errorObj.data = data;
     errorObj.response = {
