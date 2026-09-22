@@ -79,16 +79,6 @@ function AdminSidebarInner({ children }: { children: React.ReactNode }) {
       icon: DocumentTextIcon,
     },
     {
-      name: 'Add Score',
-      href: '/admission/applications?tab=score&status=SLOT_BOOKED',
-      icon: PencilSquareIcon,
-    },
-    {
-      name: 'Assign Course',
-      href: '/admission/applications?tab=course&status=EXAM_COMPLETED',
-      icon: AcademicCapIcon,
-    },
-    {
       name: 'Exam Slots',
       href: '/admission/slots',
       icon: CalendarIcon,
@@ -101,23 +91,8 @@ function AdminSidebarInner({ children }: { children: React.ReactNode }) {
   ];
 
   const isActiveLink = (href: string) => {
-    const [targetPath, targetQuery] = href.split('?');
-    const currentTab = searchParams.get('tab');
-
-    if (targetQuery) {
-      const targetParams = new URLSearchParams(targetQuery);
-      const targetTab = targetParams.get('tab');
-      return pathname === targetPath && currentTab === targetTab;
-    }
-
-    if (pathname === targetPath) {
-      if (targetPath === '/admission/applications') {
-        return !currentTab || (currentTab !== 'score' && currentTab !== 'course');
-      }
-      return true;
-    }
-
-    return targetPath !== '/admission/dashboard' && pathname.startsWith(targetPath);
+    if (pathname === href) return true;
+    return href !== '/admission/dashboard' && pathname.startsWith(href);
   };
 
   // Get current page title for top mobile header bar

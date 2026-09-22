@@ -395,19 +395,17 @@ function AdminApplicationsContent() {
       <div
         className="glass-card"
         style={{
-          padding: '16px 20px',
+          padding: '18px 20px',
           display: 'flex',
-          flexWrap: 'wrap',
+          flexDirection: 'column',
           gap: '14px',
-          alignItems: 'center',
-          justifyContent: 'space-between',
         }}
       >
-        {/* Search Input */}
-        <div style={{ flex: '1 1 240px', position: 'relative' }}>
+        {/* Row 1: Search Field in Full Width */}
+        <div style={{ width: '100%', position: 'relative' }}>
           <MagnifyingGlassIcon
             className="w-4 h-4 text-slate-400"
-            style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }}
+            style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }}
           />
           <input
             type="text"
@@ -415,22 +413,25 @@ function AdminApplicationsContent() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="form-input"
-            style={{ paddingLeft: '34px', width: '100%', fontSize: '13px' }}
+            style={{ paddingLeft: '38px', width: '100%', fontSize: '13.5px', height: '42px' }}
           />
         </div>
 
-        {/* Filter Dropdowns */}
-        <div className="filter-group-mobile" style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center' }}>
-          <div className="hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <FunnelIcon className="w-4 h-4 text-indigo-400" />
-            <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 600 }}>Filters:</span>
-          </div>
-
+        {/* Row 2: Rest of three fields */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '12px',
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             className="form-input"
-            style={{ background: 'rgba(15, 23, 42, 0.8)', fontSize: '12.5px', padding: '7px 10px' }}
+            style={{ background: 'rgba(15, 23, 42, 0.8)', fontSize: '13px', height: '40px', width: '100%' }}
           >
             <option value="ALL">All Application Statuses</option>
             <option value={ApplicationStatus.APPLICATION_CREATED}>Application Created</option>
@@ -444,7 +445,7 @@ function AdminApplicationsContent() {
             value={paymentFilter}
             onChange={(e) => setPaymentFilter(e.target.value)}
             className="form-input"
-            style={{ background: 'rgba(15, 23, 42, 0.8)', fontSize: '12.5px', padding: '7px 10px' }}
+            style={{ background: 'rgba(15, 23, 42, 0.8)', fontSize: '13px', height: '40px', width: '100%' }}
           >
             <option value="ALL">All Payment Statuses</option>
             <option value={PaymentStatus.PAID}>Paid</option>
@@ -455,7 +456,7 @@ function AdminApplicationsContent() {
             value={gradeFilter}
             onChange={(e) => setGradeFilter(e.target.value)}
             className="form-input"
-            style={{ background: 'rgba(15, 23, 42, 0.8)', fontSize: '12.5px', padding: '7px 10px' }}
+            style={{ background: 'rgba(15, 23, 42, 0.8)', fontSize: '13px', height: '40px', width: '100%' }}
           >
             <option value="ALL">All Applying Grades</option>
             <option value={Grade.GRADE_1}>Grade 1</option>
@@ -474,11 +475,13 @@ function AdminApplicationsContent() {
               }}
               className="btn"
               style={{
-                fontSize: '11.5px',
-                padding: '7px 12px',
-                background: 'rgba(255,255,255,0.05)',
+                fontSize: '12px',
+                height: '40px',
+                padding: '0 14px',
+                background: 'rgba(255,255,255,0.06)',
                 color: '#cbd5e1',
                 border: '1px solid rgba(255,255,255,0.15)',
+                whiteSpace: 'nowrap',
               }}
             >
               Reset Filters
